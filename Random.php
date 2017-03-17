@@ -4,60 +4,59 @@
         <title>Test</title>
     </head>
     <body>
+      <INPUT TYPE = "Text" VALUE ="Tilfj navn" NAME = "nytNavn"/>
         <?php
             $personer = array("Oliver", "Casper", "Mikkel", "Rune", "Emil", "Mads", "Lucas", "Andreas", "Christoffer", "Simon", "Anders", "Jonas");
-            
+
             // viser alle navn
             foreach($personer as $navn) {
                 echo "$navn <br>";
             }
-        ?>  
+        ?>
         <h3>Grupper</h3>
         <?php
             // Gruppe indeler
+            // opretter variabler
             $brugteNumre = array(false, false, false, false, false, false, false, false, false, false, false, false);
-            $antalGrupper = 4;
-            $personerPrGruppe = (12/$antalGrupper);
+            $antalGrupper = 5;
+            $gruppeNummer = 0;
 
-            for ($i = 0; $i < 4; $i++)
+            // indeler personer i grupper
+            for ($i = 0; $i < count($personer); $i++)
             {
-                for ($j = 0; $j < $personerPrGruppe; $j++)
+              $nummer = rand(0,11);
+              $plus = 0;
+
+              // angiver gruppenummeret
+              $gruppeNummer++;
+
+              // Tjekker gruppenummeret
+              if ($gruppeNummer >= $antalGrupper)
+              {
+                $gruppeNummer = 1;
+              }
+
+              // finder en person der ikke er taget i forvejen
+              while ($brugteNumre[$nummer + $plus])
+              {
+                if (($nummer + $plus + 1) >= count($personer))
                 {
-                    $nummer = rand(0,11);
-                    $plus = 0;
-
-                    while ($brugteNumre[$nummer + $plus]) 
-                    {
-                        if (($nummer + $plus + 1) >= count($personer))
-                        {
-                            $plus = 0;
-                            $nummer = 0;
-                        }
-                        else
-                        {
-                            $plus++;
-                        }
-                    }
-
-                    $brugteNumre[$nummer + $plus] = true;
-                    echo $personer[$nummer + $plus];
-
-
-                    /*
-                    if (!$brugteNumre[$nummer]) 
-                    {
-                        echo $personer[$nummer];
-                    }
-                    else
-                    {
-                        echo $personer[$nummer-1];
-                    }
-                    */
+                  $plus = 0;
+                  $nummer = 0;
                 }
-                
+                else
+                {
+                  $plus++;
+                }
+              }
 
-                echo "<br>";
+              // markere den som brugt og udskriver personen
+              $brugteNumre[$nummer + $plus] = true;
+              echo $personer[$nummer + $plus] . " " . $gruppeNummer;
             }
+
+            echo "<br>";
+          //  }
         ?>
 
 
