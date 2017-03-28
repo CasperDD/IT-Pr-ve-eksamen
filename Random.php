@@ -68,6 +68,16 @@
           //  }
         ?>
 
+        <?php
+        $dbName = $_SERVER["DOCUMENT_ROOT"] . "C:\wamp64\www\Database.mdb";
+        if (!file_exists($dbName)) {
+          die("Could not find database file.");
+        }
 
+        $db = new PDO("odbc:DRIVER={Microsoft Access Driver (*.mdb)}; DBQ=$dbName; Uid=; Pwd=;");
+
+        $sql  = "SELECT price FROM product";
+        echo $db->query($sql);
+        ?>
     </body>
 </html>
