@@ -6,7 +6,7 @@
     <body>
       <INPUT TYPE = "Text" VALUE ="Tilfj navn" NAME = "nytNavn"/>
         <?php
-            $personer = array("Oliver", "Casper", "Mikkel", "Kalle", "Emil", "Mads", "Lucas", "Andreas", "Christoffer", "Simon", "Anders", "Jonas", );
+            $personer = array("Oliver", "Casper", "Mikkel", "Kalle", "Emil", "Mads", "Lucas", "Andreas", "Christoffer", "Simon", "Anders", "Jonas");
 
             // viser alle navn
             foreach($personer as $navn) {
