@@ -21,7 +21,7 @@
             $antalGrupper = 5;
             $antalPersoner = count($personer);
             $gruppeNummer = 0;
-            $grupper = array();
+            $grupper = array_fill_keys($personer, '1');
 
             // fra "stackoverflow"
             for ($i = 0; $i <= $antalPersoner; $i++)
@@ -64,7 +64,7 @@
 
               $brugteNumre[$nummer + $plus] = true;
               echo $personer[$nummer + $plus] . " " . $gruppeNummer . " ";
-              array_push($grupper, $personer[$nummer + $plus]=>$gruppeNummer);
+              $grupper[$personer[$nummer + $plus]] = $gruppeNummer;
             }
             echo "<br>";
 
@@ -72,11 +72,16 @@
             {
               $print = "";
 
-              foreach($grupper as $navn=>$gnummer)
-              {
-                if ($i == $gnummer-1)
-                  $print += $navn . "<br>";
-              }
+              foreach ($grupper as $key => $value)
+              {
+                echo "Key:" . $key . "Value:" . $value ."<br />";
+
+                if ($i == $value)
+                {
+                  $print = $key . "<br>";
+                }
+              }
+
               echo $i+1;
               echo $print;
             }
@@ -85,7 +90,9 @@
 
           //  }
         ?>
+        <?php foreach ($variable as $key => $value): ?>
 
+        <?php endforeach; ?>
         <?php
         $dbName = $_SERVER["DOCUMENT_ROOT"] . "C:\wamp64\www\Database.mdb";
         if (!file_exists($dbName)) {
