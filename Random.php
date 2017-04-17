@@ -21,6 +21,7 @@
             $antalGrupper = 5;
             $antalPersoner = count($personer);
             $gruppeNummer = 0;
+            $grupper = array();
 
             // fra "stackoverflow"
             for ($i = 0; $i <= $antalPersoner; $i++)
@@ -60,11 +61,28 @@
               }
 
               // markere den som brugt og udskriver personen
+
               $brugteNumre[$nummer + $plus] = true;
               echo $personer[$nummer + $plus] . " " . $gruppeNummer . " ";
+              array_push($grupper, $personer[$nummer + $plus]=>$gruppeNummer);
+            }
+            echo "<br>";
+
+            for ($i=0; $i < $antalGrupper ; $i++)
+            {
+              $print = "";
+
+              foreach($grupper as $navn=>$gnummer)
+              {
+                if ($i == $gnummer-1)
+                  $print += $navn . "<br>";
+              }
+              echo $i+1;
+              echo $print;
             }
 
-            echo "<br>";
+
+
           //  }
         ?>
 
