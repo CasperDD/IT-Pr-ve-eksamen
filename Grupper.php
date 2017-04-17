@@ -135,6 +135,78 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         }
     ?>
     <h5>Grupper</h5>
+    <?php
+        // Gruppe indeler
+        // opretter variabler
+        $brugteNumre = array();
+        $antalGrupper = 5;
+        $antalPersoner = count($personer);
+        $gruppeNummer = 0;
+        $grupper = array_fill_keys($personer, '1');
+
+        // fra "stackoverflow"
+        for ($i = 0; $i <= $antalPersoner; $i++)
+        {
+          array_push($brugteNumre, false);
+        }
+        // slut
+
+        // indeler personer i grupper
+        for ($i = 0; $i < $antalPersoner; $i++)
+        {
+          $nummer = rand(0, ($antalPersoner - 1));
+          $plus = 0;
+
+          // Tjekker gruppenummeret
+          if ($gruppeNummer >= $antalGrupper)
+          {
+            $gruppeNummer = 1;
+          }
+          else
+          {
+            $gruppeNummer++;
+          }
+
+          // finder en person der ikke er taget i forvejen
+          while ($brugteNumre[$nummer + $plus])
+          {
+            if (($nummer + $plus + 1 ) >= $antalPersoner)
+            {
+              $plus = 0;
+              $nummer = 0;
+            }
+            else
+            {
+              $plus++;
+            }
+          }
+
+          // markere den som brugt og udskriver personen
+
+          $brugteNumre[$nummer + $plus] = true;
+          $grupper[$personer[$nummer + $plus]] = $gruppeNummer;
+        }
+    ?>
+
+    <?php
+    for ($i = 0; $i < $antalGrupper ; $i++)
+    {
+      echo "<h6>gruppe " . $i+1 . "</h6>";
+      echo '<table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">';
+
+      foreach ($grupper as $key => $value)
+      {
+        //echo "Key:" . $key . "Value:" . $value ."<br />";
+
+        if ($i+1 == $value)
+        {
+          echo "<tr><td>". $key . "</td></tr>";
+        }
+
+      }
+    }
+    ?>
+    <h6>gruppe 1 </h6>
     <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
       <tr>
         <td>United States</td>
