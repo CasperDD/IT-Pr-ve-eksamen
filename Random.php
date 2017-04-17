@@ -68,41 +68,25 @@
             }
             echo "<br>";
 
-            for ($i=0; $i < $antalGrupper ; $i++)
+            for ($i = 0; $i < $antalGrupper ; $i++)
             {
-              $print = "";
+              $print = " ";
 
               foreach ($grupper as $key => $value)
               {
-                echo "Key:" . $key . "Value:" . $value ."<br />";
+                //echo "Key:" . $key . "Value:" . $value ."<br />";
 
-                if ($i == $value)
+                if ($i+1 == $value)
                 {
-                  $print = $key . "<br>";
+                  $print = $print . $key . "<br>";
                 }
+
               }
 
               echo $i+1;
               echo $print;
             }
-
-
-
           //  }
-        ?>
-        <?php foreach ($variable as $key => $value): ?>
-
-        <?php endforeach; ?>
-        <?php
-        $dbName = $_SERVER["DOCUMENT_ROOT"] . "C:\wamp64\www\Database.mdb";
-        if (!file_exists($dbName)) {
-          die("Could not find database file.");
-        }
-
-        $db = new PDO("odbc:DRIVER={Microsoft Access Driver (*.mdb)}; DBQ=$dbName; Uid=; Pwd=;");
-
-        $sql  = "SELECT price FROM product";
-        echo $db->query($sql);
         ?>
     </body>
 </html>
