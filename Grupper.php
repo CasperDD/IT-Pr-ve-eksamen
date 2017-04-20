@@ -130,9 +130,9 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         $personer = array("Oliver", "Casper", "Mikkel", "Kalle", "Emil", "Mads", "Lucas", "Andreas", "Christoffer", "Simon", "Anders", "Jonas");
 
         // viser alle navn
-        foreach($personer as $navn) {
-            echo "$navn <br>";
-        }
+    //    foreach($personer as $navn) {
+    //        echo "$navn <br>";
+    //    }
     ?>
     <h5>Grupper</h5>
     <?php
@@ -189,16 +189,16 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     ?>
 
     <?php
-    for ($i = 0; $i < $antalGrupper ; $i++)
+    for ($h = 1; $h <= $antalGrupper ; $h++)
     {
-      echo "<h6>gruppe " . $i+1 . "</h6>";
+      echo '<h6>gruppe ' . $h . '</h6>';
       echo '<table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">';
 
       foreach ($grupper as $key => $value)
       {
         //echo "Key:" . $key . "Value:" . $value ."<br />";
 
-        if ($i+1 == $value)
+        if ($h == $value)
         {
           echo "<tr><td>". $key . "</td></tr>";
         }
@@ -206,6 +206,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       }
     }
     ?>
+    <!--
     <h6>gruppe 1 </h6>
     <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
       <tr>
@@ -233,31 +234,10 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         <td>1.5%</td>
       </tr>
     </table><br>
+  -->
     <button class="w3-button w3-dark-grey">More Countries  <i class="fa fa-arrow-right"></i></button>
   </div>
   <hr>
-
-  <div class="w3-container">
-    <h5>Recent Comments</h5>
-    <div class="w3-row">
-      <div class="w3-col m2 text-center">
-        <img class="w3-circle" src="/w3images/avatar3.png" style="width:96px;height:96px">
-      </div>
-      <div class="w3-col m10 w3-container">
-        <h4>John <span class="w3-opacity w3-medium">Sep 29, 2014, 9:12 PM</span></h4>
-        <p>Keep up the GREAT work! I am cheering for you!! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br>
-      </div>
-    </div>
-
-    <div class="w3-row">
-      <div class="w3-col m2 text-center">
-        <img class="w3-circle" src="/w3images/avatar1.png" style="width:96px;height:96px">
-      </div>
-      <div class="w3-col m10 w3-container">
-        <h4>Bo <span class="w3-opacity w3-medium">Sep 28, 2014, 10:15 PM</span></h4>
-        <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br>
-      </div>
-    </div>
   </div>
   <br>
 
