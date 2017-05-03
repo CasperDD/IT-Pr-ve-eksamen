@@ -79,8 +79,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   <div class="w3-panel">
     <div class="w3-row-padding" style="margin:0 -16px">
       <div class="w3-twothird">
-        <h5>Opret grupper</h5>
-    //    <?php
+        <h5>Opret Grupper</h5>
+      <?php
     //    if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //      $valgtKlasse = test_input($_POST["Klasse"]);
     //    } ?>
@@ -117,19 +117,22 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
           }
           $conn->close();
           ?>
-          </select>
-          <input type="submit" name="Indel grupper" value="formSubmit">
+        </select> <br>
+        Antal Grupper: <input type="number" name="AGrupper"><br>
+          <input type="submit" name="formSubmit" value="Indel Grupper">
       </form>
+      <br>
 
       <?php
       $valgtKlasse = "";
+      $AGrupper = 1;
+      $valgt = false;
 
       if(isset($_POST['formSubmit']) ) {
         $valgtKlasse = $_POST['Klasse'];
+        $AGrupper = $_POST['AGrupper'];
+        $valgt = true;
       }
-
-      echo $valgtKlasse;
-      echo $valgtKlasseNavn[$valgtKlasse];
       ?>
       </div>
     </div>
@@ -164,23 +167,33 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
             array_push($personer, $row["FNavn"] . " " . $row["LNavn"]);
           }
         } else {
-          echo "0 results";
+        //  echo "0 results";
         }
         $conn->close();
 
 
         // viser alle navn
-    //      echo "<h5>Elever i klassen</h5>";
-    //    foreach($personer as $navn) {
-    //        echo "$navn <br>";
-    //    }
     ?>
-    <h5>Grupper</h5>
     <?php
+      if ($valgt)
+      {
+        echo "<h5>Grupper</h5>";
+        echo "Valgt Klasse: " . $valgtKlasseNavn[$valgtKlasse] . "<br>";
+        echo "Antal Grupper: " . $AGrupper;
+        echo "<h5>Elever: </h5> <br>";
+        // viser alle navne
+        foreach($personer as $navn) {
+            echo "$navn <br>";
+        }
+        $valgt = false;
+
+
+
+
         // Gruppe indeler
         // opretter variabler
         $brugteNumre = array();
-        $antalGrupper = 5;
+        $antalGrupper = $AGrupper;
         $antalPersoner = count($personer);
         $gruppeNummer = 0;
         $grupper = array_fill_keys($personer, '1');
@@ -227,12 +240,10 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
           $brugteNumre[$nummer + $plus] = true;
           $grupper[$personer[$nummer + $plus]] = $gruppeNummer;
         }
-    ?>
 
-    <?php
     for ($h = 1; $h <= $antalGrupper ; $h++)
     {
-      echo '<h6>gruppe ' . $h . '</h6>';
+      echo '<h6>Gruppe ' . $h . '</h6>';
       echo '<table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">';
 
       foreach ($grupper as $key => $value)
@@ -247,6 +258,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
       echo "</table>";
     }
+  }
     ?>
     <!--
     <h6>gruppe 1 </h6>
@@ -277,7 +289,6 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       </tr>
     </table><br>
   -->
-    <button class="w3-button w3-dark-grey">More Countries  <i class="fa fa-arrow-right"></i></button>
   </div>
   <hr>
   </div>
