@@ -82,45 +82,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <div class="w3-row-padding" style="margin:0 -16px">
       <div class="w3-twothird">
         <h5>Opret Grupper</h5>
-      <?php
-    //    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    //      $valgtKlasse = test_input($_POST["Klasse"]);
-    //    } ?>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-        Vælg klasse:
-          <select name="Klasse">
-
-        <?php
-          $valgtKlasseNavn = array('0' => "0");
-
-          $servername = "localhost";
-          $username = "root";
-          $password = "123";
-          $dbname = "database1";
-
-          // Create connection
-          $conn = new mysqli($servername, $username, $password, $dbname);
-          // Check connection
-          if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-          }
-
-          $sql = "SELECT KlasseID, KNavn FROM klasse";
-          $result = $conn->query($sql);
-
-          if ($result->num_rows > 0) {
-            // output data of each row
-            while($row = $result->fetch_assoc()) {
-              echo '<option value="' . $row["KlasseID"] . '">' . $row["KNavn"] . '</option>';
-              $valgtKlasseNavn[$row["KlasseID"]] = $row["KNavn"];
-            }
-          } else {
-            echo "0 results";
-          }
-          $conn->close();
-          ?>
-        </select> <br>
-        Antal Grupper: <input type="number" name="AGrupper"><br>
+          Select image to upload: <input type="file" name="fileToUpload" id="fileToUpload">
           <input type="submit" name="formSubmit" value="Indel Grupper">
       </form>
       <br>
@@ -144,122 +107,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <!--********** Random bliver inkluderet starter her og designet ********** -->
   <div class="w3-container">
     <!-- random init -->
-    <?php
-    // init personer
-        $personer = array();
-
-        $servername = "localhost";
-        $username = "root";
-        $password = "123";
-        $dbname = "database1";
-
-        // Create connection
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        // Check connection
-        if ($conn->connect_error) {
-          die("Connection failed: " . $conn->connect_error);
-        }
-
-        $sql = "SELECT FNavn, LNavn FROM elev WHERE KlasseID='". $valgtKlasse . "'";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-          // output data of each row
-          while($row = $result->fetch_assoc()) {
-            array_push($personer, $row["FNavn"] . " " . $row["LNavn"]);
-          }
-        } else {
-        //  echo "0 results";
-        }
-        $conn->close();
 
 
-        // viser alle navn
-      if ($valgt)
-      {
-        echo "<h5>Grupper</h5>";
-        echo "Valgt Klasse: " . $valgtKlasseNavn[$valgtKlasse] . "<br>";
-        echo "Antal Grupper: " . $AGrupper;
-        echo "<h5>Elever: </h5>";
-        // viser alle navne
-        foreach($personer as $navn) {
-            echo "$navn <br>";
-        }
-        $valgt = false;
-
-
-
-
-        // Gruppe indeler
-        // opretter variabler
-        $brugteNumre = array();
-        $antalGrupper = $AGrupper;
-        $antalPersoner = count($personer);
-        $gruppeNummer = 0;
-        $grupper = array_fill_keys($personer, '1');
-
-        // fra "stackoverflow"
-        for ($i = 0; $i <= $antalPersoner; $i++)
-        {
-          array_push($brugteNumre, false);
-        }
-        // slut
-
-        // indeler personer i grupper
-        for ($i = 0; $i < $antalPersoner; $i++)
-        {
-          $nummer = rand(0, ($antalPersoner - 1));
-          $plus = 0;
-
-          // Tjekker gruppenummeret
-          if ($gruppeNummer >= $antalGrupper)
-          {
-            $gruppeNummer = 1;
-          }
-          else
-          {
-            $gruppeNummer++;
-          }
-
-          // finder en person der ikke er taget i forvejen
-          while ($brugteNumre[$nummer + $plus])
-          {
-            if (($nummer + $plus + 1 ) >= $antalPersoner)
-            {
-              $plus = 0;
-              $nummer = 0;
-            }
-            else
-            {
-              $plus++;
-            }
-          }
-
-          // markere den som brugt og udskriver personen
-
-          $brugteNumre[$nummer + $plus] = true;
-          $grupper[$personer[$nummer + $plus]] = $gruppeNummer;
-        }
-
-    for ($h = 1; $h <= $antalGrupper ; $h++)
-    {
-      echo '<h6>Gruppe ' . $h . '</h6>';
-      echo '<table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">';
-
-      foreach ($grupper as $key => $value)
-      {
-        //echo "Key:" . $key . "Value:" . $value ."<br />";
-
-        if ($h == $value)
-        {
-          echo "<tr><td>". $key . "</td></tr>";
-        }
-      }
-
-      echo "</table>";
-    }
-  }
-    ?>
   </div>
   <hr>
   </div>
